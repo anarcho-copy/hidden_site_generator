@@ -21,7 +21,7 @@ python3
 ## Proje Dizinleri
 
 ```
-bin/        : generatörü inşa eden temek dosyalar.
+bin/        : generatörü inşa eden temel dosyalar.
 src/        : kullanılan ek kaynaklar
 var/        : veri tabanı (sqlite3)
 i/template  : html şablonları
