@@ -1,0 +1,10 @@
+-prune
+! -iname robots.txt
+! -iname sitemap.\*
+! -iname .\*
+! -path ./css/\*
+! -path ./img/\*
+! -path ./archive/\*
+! -path ./music/\*
+! -path ./txt/\*
+

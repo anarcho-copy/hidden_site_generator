@@ -1,0 +1,7 @@
+CREATE TABLE article_html ( id int, code TEXT )
+CREATE TABLE author_books (id int, author TEXT, url TEXT)
+CREATE TABLE books(id int, title TEXT, author TEXT, url TEXT , status TEXT, date TEXT, lang TEXT, type TEXT, keywords TEXT, description TEXT, subtitle TEXT)
+CREATE TABLE "websites" (
+	"title"	TEXT,
+	"url"	TEXT
+)

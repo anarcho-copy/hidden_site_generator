@@ -1,0 +1,9 @@
+#this script written in GNU bash, version 5.0.16(1)-release (x86_64-pc-linux-gnu)
+ghostscript
+imagemagick
+exiftool
+sqlite3
+
+#some OS includes md5sum,python3 | debian etc.
+md5sum 
+python3
