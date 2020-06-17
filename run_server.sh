@@ -56,6 +56,7 @@ bin/generate_websites_index.sh && echo "websites index page generated"
 
 #create static contents [-c] option
 function create() {
+mkdir -p i/listen/copy
 bin/generate_pdf_files.sh -iem #-c option is delete already created files
 }
 
@@ -63,6 +64,7 @@ bin/generate_pdf_files.sh -iem #-c option is delete already created files
 
 #generate the web site as use created files [-g option]
 function main() {
+mkdir -p public/;
 rm -rf public/* &> /dev/null && echo "pages deleted"
 mkdir public/free &> /dev/null && echo "pdf raw dir created"
 cp -r i/out/* public/ && echo "i/out/* files are copied."
@@ -78,7 +80,7 @@ nohup bash src/index.sh > public/index/index.html &
 #run tor server/container [-r] option
 function tor_server() {
 function start_tor_server() {
-docker rm hiddensite -f; #for security deleting the old container
+docker rm hiddensite -f &> /dev/null; #for security deleting the old container
 docker run -d --restart=always -h "onion-service" --network="host" --name hiddensite -v $(pwd)/web:/web tor-docker;
 }
 start_tor_server && echo "tor server is running.. hostname: $(grep -oP "server_name\s+\K\w+" web/site.conf).onion"
