@@ -1,3 +1,4 @@
+web/
+i/out/*
+i/listen/*
 public/
-i/out/
-i/listen/

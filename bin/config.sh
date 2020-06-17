@@ -1,5 +1,13 @@
 #!/bin/bash
 
+##meta configs
+generator="HTML generator BASH (bash-builtin), https://git.anarcho-copy.org/www.anarcho-copy.org/gen_html";
+
+#website main title
+site_title="Anarcho-Copy Hidden Site"
+hidden_site=$(echo "http://$(grep -oP "server_name\s+\K\w+" ../web/site.conf).onion")
+base_href=$hidden_site ##not using at <!--force_base_href-->
+
 temp="../.tmp";
 
 #set color
@@ -10,22 +18,33 @@ redend="\e[0m";
 data_base="../var/books.db";
 
 #pdfs dir config
-pdf_dir="/var/www/public/anarcho-copy.org/free"
+pdf_dir="/mnt/disk/free"
 
-#call java file
-function url_slug() {
-java -classpath ../src/ TurkishCharacterToUrl
+#style
+function print_style() {
+cat <<EOT
+<link href="/css/primer.css" rel="stylesheet" />
+EOT
 }
+style=`echo "$(print_style)"`
+######
+
+
+zine_count=$(sqlite3 $data_base "SELECT status FROM books WHERE status IS 'zine';" | wc -l)
+books_count=$(sqlite3 $data_base "SELECT status FROM books WHERE status IS NOT 'zine';" | wc -l)
+total_count=$(sqlite3 $data_base "SELECT COUNT(*) FROM books;")
 function name_encode() {
 ../src/urlencode.sh "$1"
 }
 
+
+
+#call url slug
+url_slug="../src/slug_v0.2.2.sh"
+
 #call convert.sh
 convert_table="../src/convert.sh"
 
-
-#search url
-cgi_search="https://search.anarcho-copy.org/cgi-bin/search.sh?page=";
 
 #listen copy dir
 listenCopy="../i/listen/copy"
@@ -64,7 +83,7 @@ sqlite3 $data_base "SELECT url, author FROM author_books;" > $temp/authors_zines
 
 #CREATE BOOKS TABLE /IS NOT ZINE
 function create_books_table() {
-sqlite3 $data_base "SELECT title,author,url FROM books WHERE status IS NOT 'zine'" > $temp/books_table.txt
+sqlite3 $data_base "SELECT title,author,url,status FROM books WHERE status IS NOT 'zine'" > $temp/books_table.txt
 }
 
 #CREATE ALL BOOKS TABLE
@@ -117,7 +136,7 @@ done < $temp/.author_index.txt;
 
 #LOOP FOR without zines books
 function ifs_loop_bt() {
-while IFS="|" read -r title author url;
+while IFS="|" read -r title author url status;
 do
 $1
 done < $temp/books_table.txt
@@ -138,5 +157,3 @@ sqlite3 $data_base "SELECT url, title FROM books WHERE author LIKE '%$1%';" > $t
 }
 
 
-##meta configs
-generator="Anarcho-Copy HTML generator BASH (bash-builtin), https://gitlab.com/anarcho-copy/html-generator_bash/";

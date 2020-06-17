@@ -3,7 +3,7 @@
 # https://github.com/mcmilk/sitemap-generator
 
 # url configuration
-URL="https://anarcho-copy.org/"
+URL="" #not yet
 
 # values: always hourly daily weekly monthly yearly never
 FREQ="monthly"

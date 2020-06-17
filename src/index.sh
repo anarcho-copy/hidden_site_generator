@@ -1,15 +1,19 @@
 #!/bin/bash
 #START
+res1=$(date +%s.%N)
+
 cd "$(dirname "$0")"
+cd ../bin/;
+. config.sh; #import
+cd - &> /dev/null
 
 db_file="../var/books.db";
+
+index_chars="1 A B C Ç D E F G Ğ I İ J K L M N O Ö P R S Ş T U Ü V W Y Z";
 
 #CGI-Bash compatible
 #echo "Content-type: text/html"
 #echo ""
-
-res1=$(date +%s.%N)
-
 
 function author_index() {
 sqlite3 $db_file "SELECT author FROM books WHERE author LIKE '$1%'" > /tmp/.list.txt
@@ -17,7 +21,7 @@ sort /tmp/.list.txt | uniq -ci > /tmp/.listed.txt
 while IFS=" " read -r count author
 do
 cat <<EOT
-<a href="#$(cat /tmp/.author_count)">$author</a> ($count),
+<a href="/index/#$(cat /tmp/.author_count)">$author</a> ($count),
 EOT
  echo "$((  $(cat /tmp/.author_count) + 1 ))" > /tmp/.author_count 
 done < /tmp/.listed.txt
@@ -26,7 +30,7 @@ done < /tmp/.listed.txt
 
 function author_loop() {
 echo "0" > /tmp/.author_count
-for x in 1 A B C Ç D E F G Ğ I İ J K L M N O Ö P R S Ş T U Ü V W Y Z;
+for x in $index_chars;
 do
 cat <<EOT
 $(author_index $x)
@@ -43,7 +47,7 @@ sqlite3 $db_file "SELECT title,url FROM books WHERE author IS '$1'" > /tmp/.tabl
 while IFS="|" read -r title url
 do
 cat <<EOT
-<li><a href="https://anarcho-copy.org/copy/$url">$title</a></li>
+<li><a href="/copy/$url/">$title</a></li>
 EOT
 done < /tmp/.table.txt
 }
@@ -55,7 +59,7 @@ sort /tmp/.list.txt | uniq -ci > /tmp/.listed.txt
 while IFS=" " read -r count author
 do
 cat <<EOT
-<li id="$(cat /tmp/.id_count)">$author ($count)
+<li id="$(cat /tmp/.id_count)"><span id="$(echo "$author" | bash $url_slug )">$author ($count)</span>
 <ul>
 $(author_table "$author")
 </ul>
@@ -68,7 +72,7 @@ done < /tmp/.listed.txt
 
 function start_loop() {
 echo "0" > /tmp/.id_count
-for x in 1 A B C Ç D E F G Ğ I İ J K L M N O Ö P R S Ş T U Ü V W Y Z;
+for x in $index_chars;
 do
 cat <<EOT
 <div id="$x">
@@ -84,10 +88,10 @@ done;
 }
 
 function letters() {
-for x in 1 A B C Ç D E F G Ğ I İ J K L M N O Ö P R S Ş T U Ü V W Y Z;
+for x in $index_chars;
 do
 cat <<EOT
- <a href="#$x">$x</a>&nbsp;
+ <a href="/index/#$x">$x</a>&nbsp;
 EOT
 done;
 }
@@ -96,9 +100,11 @@ cat <<EOT
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>db index for books</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--force_base_href-->
+<title>Kapsamlı İndex</title>
+$style
 <style>
 body {
 color:black;
@@ -108,7 +114,16 @@ background-color:white;
 #author a { color: blue; text-decoration: none;}
 </style>
 </head>
-<body>
+<body class="bg-gray">
+<div id="holy" class="container-lg bg-white h-100">
+    <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+        <a class="UnderlineNav-actions muted-link h2" href="/index.html">
+    $site_title</a>
+       </nav>
+   </div>
+<br>
+<div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
 <div id="author">
 $(author_loop)
 </div>
@@ -133,9 +148,9 @@ dm=$(echo "$dt3/60" | bc)
 ds=$(echo "$dt3-60*$dm" | bc)
 
 echo "<hr>"
-LC_NUMERIC=C printf "Page build by Bash script in about %02.4f seconds\n" $ds
+LC_NUMERIC=C printf 'Page build by <a href="/tools/index.sh.html">Bash script</a> in about %02.4f seconds\n' $ds
 
-echo -ne "</body>\n</html>"
+echo -ne "</br></br></div>\n</div>\n</body>\n</html>"
 
 ##END
 

@@ -10,7 +10,7 @@ function author_index() { #from author_index_html.sh
 #HTML CODE
 function generate_html() {
 cat <<EOT
-<li><a href="$url">$author</a></li>
+  <li><a href="/pdf/$url/">$author <span class="Counter Counter--gray">$(sqlite3 $data_base "SELECT author FROM books WHERE author IS '$author';" | wc -l)</span> </a></li>
 EOT
 }
 
