@@ -42,7 +42,18 @@ coreutils
 
 ## Çalıştırmadan Önce..
 
-Proje dizinine git ve;
+Gerekli pdf dosyalarını indirip dizinleri ayarla.
+
+```
+$ sudo mkdir -p /mnt/disk/free/
+$ sudo chown -R $USER:$USER /mnt/disk/free/
+$ cd /mnt/disk/free/
+$ wget https://indir.anarcho-copy.org/free.tar.gz
+$ tar xzvf free.tar.gz
+$ mv free/* . && rm -rf free/ free.tar.gz
+```
+
+Ardından proje dizinine git ve;
 
 gerekli programları indir,
 
