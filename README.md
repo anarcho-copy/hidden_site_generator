@@ -47,7 +47,7 @@ Proje dizinine git ve;
 gerekli programları indir,
 
 ```
-$ ./Install_requirements.sh
+$ sudo ./Install_requirements.sh
 ```
 
 
