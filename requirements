@@ -3,7 +3,7 @@ ghostscript
 imagemagick
 exiftool
 sqlite3
+nginx
 
-#some OS includes md5sum,python3 | debian etc.
-md5sum 
-python3
+#some OS includes coreutils | debian etc.
+md5sum

@@ -3,7 +3,7 @@ cd "$(dirname "$0")";
 
 . config.sh #import
 . $template/websites_html.sh  #import
-mkdir -p $workdir/anarsist-siteler
+mkdir -p $workdir/siteler
 
 sqlite3 $data_base "SELECT title,url FROM websites" > $temp/websites.txt #create txt db
 
@@ -20,4 +20,4 @@ EOT
 done < $temp/websites.txt
 }
 
-websites_html > $workdir/anarsist-siteler/index.html
+websites_html > $workdir/siteler/index.html

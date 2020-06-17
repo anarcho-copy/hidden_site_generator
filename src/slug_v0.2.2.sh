@@ -1,9 +1,5 @@
 #!/bin/bash
 # https://gist.github.com/rosiba/d9c06fe15a661094d4da4565355225a8
-#
-# Copy(A)
-# No Copyright / Anti-Copyright
-
 
 # define replacements
 declare -a repls=(

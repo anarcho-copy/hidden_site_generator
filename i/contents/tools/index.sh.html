@@ -1,0 +1,172 @@
+<html>
+<head>
+<title>index.sh</title>
+<meta charset="utf-8">
+<style>
+body {
+color: white;
+background-color:black;
+}
+</style>
+</head>
+<body>
+<!-- HTML generated using hilite.me --><div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #000080">#!/bin/bash</span>
+<span style="color: #000080">#START</span>
+<span style="color: #00cdcd">res1</span><span style="color: #3399cc">=</span><span style="color: #cdcd00">$(</span>date +%s.%N<span style="color: #cdcd00">)</span>
+
+<span style="color: #cd00cd">cd</span> <span style="color: #cd0000">&quot;$(dirname &quot;</span><span style="color: #00cdcd">$0</span><span style="color: #cd0000">&quot;)&quot;</span>
+<span style="color: #cd00cd">cd</span> ../bin/;
+. config.sh; <span style="color: #000080">#import</span>
+<span style="color: #cd00cd">cd</span> - &amp;&gt; /dev/null
+
+<span style="color: #00cdcd">db_file</span><span style="color: #3399cc">=</span><span style="color: #cd0000">&quot;../var/books.db&quot;</span>;
+
+<span style="color: #00cdcd">index_chars</span><span style="color: #3399cc">=</span><span style="color: #cd0000">&quot;1 A B C Ç D E F G Ğ I İ J K L M N O Ö P R S Ş T U Ü V W Y Z&quot;</span>;
+
+<span style="color: #000080">#CGI-Bash compatible</span>
+<span style="color: #000080">#echo &quot;Content-type: text/html&quot;</span>
+<span style="color: #000080">#echo &quot;&quot;</span>
+
+<span style="color: #cdcd00">function </span>author_index<span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+sqlite3 <span style="color: #00cdcd">$db_file</span> <span style="color: #cd0000">&quot;SELECT author FROM books WHERE author LIKE &#39;$1%&#39;&quot;</span> &gt; /tmp/.list.txt
+sort /tmp/.list.txt | uniq -ci &gt; /tmp/.listed.txt
+<span style="color: #cdcd00">while </span><span style="color: #00cdcd">IFS</span><span style="color: #3399cc">=</span><span style="color: #cd0000">&quot; &quot;</span> <span style="color: #cd00cd">read</span> -r count author
+<span style="color: #cdcd00">do</span>
+cat <span style="color: #cd0000">&lt;&lt;EOT</span>
+<span style="color: #cd0000">&lt;a href=&quot;/index/#$(cat /tmp/.author_count)&quot;&gt;$author&lt;/a&gt; ($count),</span>
+<span style="color: #cd0000">EOT</span>
+ <span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;$((  $(cat /tmp/.author_count) + 1 ))&quot;</span> &gt; /tmp/.author_count 
+<span style="color: #cdcd00">done</span> &lt; /tmp/.listed.txt
+<span style="color: #3399cc">}</span>
+
+
+<span style="color: #cdcd00">function </span>author_loop<span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+<span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;0&quot;</span> &gt; /tmp/.author_count
+<span style="color: #cdcd00">for </span>x in <span style="color: #00cdcd">$index_chars</span>;
+<span style="color: #cdcd00">do</span>
+cat <span style="color: #cd0000">&lt;&lt;EOT</span>
+<span style="color: #cd0000">$(author_index $x)</span>
+<span style="color: #cd0000">EOT</span>
+<span style="color: #cdcd00">done</span>;
+<span style="color: #3399cc">}</span>
+
+
+
+<span style="color: #000080">###########################3</span>
+
+<span style="color: #cdcd00">function </span>author_table<span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+sqlite3 <span style="color: #00cdcd">$db_file</span> <span style="color: #cd0000">&quot;SELECT title,url FROM books WHERE author IS &#39;$1&#39;&quot;</span> &gt; /tmp/.table.txt
+<span style="color: #cdcd00">while </span><span style="color: #00cdcd">IFS</span><span style="color: #3399cc">=</span><span style="color: #cd0000">&quot;|&quot;</span> <span style="color: #cd00cd">read</span> -r title url
+<span style="color: #cdcd00">do</span>
+cat <span style="color: #cd0000">&lt;&lt;EOT</span>
+<span style="color: #cd0000">&lt;li&gt;&lt;a href=&quot;/copy/$url/&quot;&gt;$title&lt;/a&gt;&lt;/li&gt;</span>
+<span style="color: #cd0000">EOT</span>
+<span style="color: #cdcd00">done</span> &lt; /tmp/.table.txt
+<span style="color: #3399cc">}</span>
+
+
+<span style="color: #cdcd00">function </span>start_index<span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+sqlite3 <span style="color: #00cdcd">$db_file</span> <span style="color: #cd0000">&quot;SELECT author FROM books WHERE author LIKE &#39;$1%&#39;&quot;</span> &gt; /tmp/.list.txt
+sort /tmp/.list.txt | uniq -ci &gt; /tmp/.listed.txt
+<span style="color: #cdcd00">while </span><span style="color: #00cdcd">IFS</span><span style="color: #3399cc">=</span><span style="color: #cd0000">&quot; &quot;</span> <span style="color: #cd00cd">read</span> -r count author
+<span style="color: #cdcd00">do</span>
+cat <span style="color: #cd0000">&lt;&lt;EOT</span>
+<span style="color: #cd0000">&lt;li id=&quot;$(cat /tmp/.id_count)&quot;&gt;&lt;span id=&quot;$(echo &quot;$author&quot; | bash $url_slug )&quot;&gt;$author ($count)&lt;/span&gt;</span>
+<span style="color: #cd0000">&lt;ul&gt;</span>
+<span style="color: #cd0000">$(author_table &quot;$author&quot;)</span>
+<span style="color: #cd0000">&lt;/ul&gt;</span>
+<span style="color: #cd0000">&lt;/li&gt;</span>
+<span style="color: #cd0000">EOT</span>
+ <span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;$((  $(cat /tmp/.id_count) + 1 ))&quot;</span> &gt; /tmp/.id_count 
+<span style="color: #cdcd00">done</span> &lt; /tmp/.listed.txt
+<span style="color: #3399cc">}</span>
+
+
+<span style="color: #cdcd00">function </span>start_loop<span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+<span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;0&quot;</span> &gt; /tmp/.id_count
+<span style="color: #cdcd00">for </span>x in <span style="color: #00cdcd">$index_chars</span>;
+<span style="color: #cdcd00">do</span>
+cat <span style="color: #cd0000">&lt;&lt;EOT</span>
+<span style="color: #cd0000">&lt;div id=&quot;$x&quot;&gt;</span>
+<span style="color: #cd0000">&lt;li&gt;&lt;h1&gt;$x&lt;/h1&gt;</span>
+<span style="color: #cd0000">&lt;ul&gt;</span>
+<span style="color: #cd0000">$(start_index $x)</span>
+<span style="color: #cd0000">&lt;/ul&gt;</span>
+<span style="color: #cd0000">&lt;/li&gt;</span>
+<span style="color: #cd0000">&lt;/div&gt;</span>
+<span style="color: #cd0000">&lt;br&gt;</span>
+<span style="color: #cd0000">EOT</span>
+<span style="color: #cdcd00">done</span>;
+<span style="color: #3399cc">}</span>
+
+<span style="color: #cdcd00">function </span>letters<span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+<span style="color: #cdcd00">for </span>x in <span style="color: #00cdcd">$index_chars</span>;
+<span style="color: #cdcd00">do</span>
+cat <span style="color: #cd0000">&lt;&lt;EOT</span>
+<span style="color: #cd0000"> &lt;a href=&quot;/index/#$x&quot;&gt;$x&lt;/a&gt;&amp;nbsp;</span>
+<span style="color: #cd0000">EOT</span>
+<span style="color: #cdcd00">done</span>;
+<span style="color: #3399cc">}</span>
+
+cat <span style="color: #cd0000">&lt;&lt;EOT</span>
+<span style="color: #cd0000">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #cd0000">&lt;html&gt;</span>
+<span style="color: #cd0000">&lt;head&gt;</span>
+<span style="color: #cd0000">&lt;meta charset=&quot;utf-8&quot;&gt;</span>
+<span style="color: #cd0000">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;</span>
+<span style="color: #cd0000">&lt;!--force_base_href--&gt;</span>
+<span style="color: #cd0000">&lt;title&gt;Kapsamlı İndex&lt;/title&gt;</span>
+<span style="color: #cd0000">$style</span>
+<span style="color: #cd0000">&lt;style&gt;</span>
+<span style="color: #cd0000">body {</span>
+<span style="color: #cd0000">color:black;</span>
+<span style="color: #cd0000">background-color:white;</span>
+<span style="color: #cd0000">}</span>
+<span style="color: #cd0000">#letters a { color: red; font-size: 25px;}</span>
+<span style="color: #cd0000">#author a { color: blue; text-decoration: none;}</span>
+<span style="color: #cd0000">&lt;/style&gt;</span>
+<span style="color: #cd0000">&lt;/head&gt;</span>
+<span style="color: #cd0000">&lt;body class=&quot;bg-gray&quot;&gt;</span>
+<span style="color: #cd0000">&lt;div id=&quot;holy&quot; class=&quot;container-lg bg-white h-100&quot;&gt;</span>
+<span style="color: #cd0000">    &lt;div id=&quot;header&quot; class=&quot;px-1 bg-white&quot;&gt;</span>
+<span style="color: #cd0000">        &lt;nav class=&quot;UnderlineNav UnderlineNav--right px-2&quot;&gt;</span>
+<span style="color: #cd0000">        &lt;a class=&quot;UnderlineNav-actions muted-link h2&quot; href=&quot;/index.html&quot;&gt;</span>
+<span style="color: #cd0000">    $site_title&lt;/a&gt;</span>
+<span style="color: #cd0000">       &lt;/nav&gt;</span>
+<span style="color: #cd0000">   &lt;/div&gt;</span>
+<span style="color: #cd0000">&lt;br&gt;</span>
+<span style="color: #cd0000">&lt;div role=&quot;main&quot; id=&quot;main&quot; class=&quot;holy-main markdown-body px-4 bg-white&quot;&gt;</span>
+<span style="color: #cd0000">&lt;div id=&quot;author&quot;&gt;</span>
+<span style="color: #cd0000">$(author_loop)</span>
+<span style="color: #cd0000">&lt;/div&gt;</span>
+<span style="color: #cd0000">&lt;hr&gt;</span>
+<span style="color: #cd0000">&lt;div id=&quot;letters&quot;&gt;</span>
+<span style="color: #cd0000">$(letters)</span>
+<span style="color: #cd0000">&lt;/div&gt;</span>
+<span style="color: #cd0000">&lt;hr&gt;</span>
+<span style="color: #cd0000">&lt;ul&gt;</span>
+<span style="color: #cd0000">$(start_loop)</span>
+<span style="color: #cd0000">&lt;/ul&gt;</span>
+<span style="color: #cd0000">EOT</span>
+
+
+<span style="color: #00cdcd">res2</span><span style="color: #3399cc">=</span><span style="color: #cdcd00">$(</span>date +%s.%N<span style="color: #cdcd00">)</span>
+<span style="color: #00cdcd">dt</span><span style="color: #3399cc">=</span><span style="color: #cdcd00">$(</span><span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;$res2 - $res1&quot;</span> | bc<span style="color: #cdcd00">)</span>
+<span style="color: #00cdcd">dd</span><span style="color: #3399cc">=</span><span style="color: #cdcd00">$(</span><span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;$dt/86400&quot;</span> | bc<span style="color: #cdcd00">)</span>
+<span style="color: #00cdcd">dt2</span><span style="color: #3399cc">=</span><span style="color: #cdcd00">$(</span><span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;$dt-86400*$dd&quot;</span> | bc<span style="color: #cdcd00">)</span>
+<span style="color: #00cdcd">dh</span><span style="color: #3399cc">=</span><span style="color: #cdcd00">$(</span><span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;$dt2/3600&quot;</span> | bc<span style="color: #cdcd00">)</span>
+<span style="color: #00cdcd">dt3</span><span style="color: #3399cc">=</span><span style="color: #cdcd00">$(</span><span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;$dt2-3600*$dh&quot;</span> | bc<span style="color: #cdcd00">)</span>
+<span style="color: #00cdcd">dm</span><span style="color: #3399cc">=</span><span style="color: #cdcd00">$(</span><span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;$dt3/60&quot;</span> | bc<span style="color: #cdcd00">)</span>
+<span style="color: #00cdcd">ds</span><span style="color: #3399cc">=</span><span style="color: #cdcd00">$(</span><span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;$dt3-60*$dm&quot;</span> | bc<span style="color: #cdcd00">)</span>
+
+<span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;&lt;hr&gt;&quot;</span>
+<span style="color: #00cdcd">LC_NUMERIC</span><span style="color: #3399cc">=</span>C <span style="color: #cd00cd">printf</span> <span style="color: #cd0000">&quot;Page build by Bash script in about %02.4f seconds\n&quot;</span> <span style="color: #00cdcd">$ds</span>
+
+<span style="color: #cd00cd">echo</span> -ne <span style="color: #cd0000">&quot;&lt;/br&gt;&lt;/br&gt;&lt;/div&gt;\n&lt;/div&gt;\n&lt;/body&gt;\n&lt;/html&gt;&quot;</span>
+
+<span style="color: #000080">##END</span>
+</pre></div>
+
+
+</body>
+</html>

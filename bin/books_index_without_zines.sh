@@ -10,8 +10,10 @@ function books_index_without_zines() {
 
 #HTML CODE
 function generate_html() {
+
+
 cat <<EOT
-  <li><a href="/copy/$url">$title - $author</a></li>
+  <li><a href="/copy/$url/">$title PDF - <span style="color:red">$author</span> $([[ "$status" == "new" ]] &&  echo '<code>internette yeni</code>')</a></li>
 EOT
 }
 

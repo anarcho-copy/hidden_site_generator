@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>convet.sh</title>
+<meta charset="utf-8">
+<style>
+body {
+color: white;
+background-color:black;
+}
+</style>
+</head>
+<body>
+
+<!-- HTML generated using hilite.me --><div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #000080">#!/bin/sh</span>
+<span style="color: #000080">#convert_2_html_table.sh </span>
+<span style="color: #000080">#Converts a delimited file to a HTML table</span>
+<span style="color: #000080">#Jadu Saikia http://unstableme.blogspot.in</span>
+
+<span style="color: #00cdcd">NOARG</span><span style="color: #3399cc">=</span>64
+
+<span style="color: #000080">#usage function</span>
+f_Usage <span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+<span style="color: #cd00cd">echo</span> <span style="color: #cd0000">&quot;Usage: $(basename $0) -d &lt;delimiter&gt; -f &lt;delimited-file&gt;&quot;</span>
+<span style="color: #3399cc">}</span>
+
+<span style="color: #000080">#command line args</span>
+<span style="color: #cdcd00">while </span><span style="color: #cd00cd">getopts </span>d:f: OPTION
+<span style="color: #cdcd00">do</span>
+<span style="color: #cdcd00">    case</span> <span style="color: #00cdcd">$OPTION</span> in
+        d<span style="color: #3399cc">)</span>  <span style="color: #00cdcd">DELIMITER</span><span style="color: #3399cc">=</span><span style="color: #00cdcd">$OPTARG</span> ;;
+        f<span style="color: #3399cc">)</span>  <span style="color: #00cdcd">INFILE</span><span style="color: #3399cc">=</span><span style="color: #00cdcd">$OPTARG</span> ;;
+    <span style="color: #cdcd00">esac</span>
+<span style="color: #cdcd00">done</span>
+
+<span style="color: #000080">#Less than 2 command line argument, throw Usage</span>
+<span style="color: #3399cc">[</span> <span style="color: #cd0000">&quot;$#&quot;</span> -lt 2 <span style="color: #3399cc">]</span> <span style="color: #3399cc">&amp;&amp;</span> f_Usage <span style="color: #3399cc">&amp;&amp;</span> <span style="color: #cd00cd">exit</span> <span style="color: #00cdcd">$NOARG</span>
+
+<span style="color: #00cdcd">DEFAULTDELIMITER</span><span style="color: #3399cc">=</span><span style="color: #cd0000">&quot; :&quot;</span>
+<span style="color: #000080">#If no delimiter is supplied, default delimiter is comma i.e. ,</span>
+<span style="color: #00cdcd">SEPARATOR</span><span style="color: #3399cc">=</span><span style="color: #cdcd00">${</span><span style="color: #00cdcd">DELIMITER</span><span style="color: #cdcd00">:-</span><span style="color: #00cdcd">$DEFAULTDELIMITER</span><span style="color: #cdcd00">}</span>
+
+<span style="color: #cdcd00">if</span> <span style="color: #3399cc">[</span> -f <span style="color: #cd0000">&quot;${INFILE}&quot;</span> <span style="color: #3399cc">]</span>
+        <span style="color: #cdcd00">then</span>
+<span style="color: #cdcd00">                </span><span style="color: #cd00cd">printf</span> <span style="color: #cd0000">&quot;&lt;table border=\&quot;1\&quot;&gt;&quot;</span>
+                sed <span style="color: #cd0000">&quot;s/$SEPARATOR/&lt;\/td&gt;&lt;td&gt;/g&quot;</span> <span style="color: #00cdcd">$INFILE</span> | <span style="color: #cdcd00">while </span><span style="color: #cd00cd">read </span>line
+                        <span style="color: #cdcd00">do</span>
+<span style="color: #cdcd00">                                </span><span style="color: #cd00cd">printf</span> <span style="color: #cd0000">&quot;&lt;tr&gt;&lt;td&gt;${line}&lt;/td&gt;&lt;/tr&gt;&quot;</span>
+                <span style="color: #cdcd00">done</span>
+<span style="color: #cdcd00">                </span><span style="color: #cd00cd">printf</span> <span style="color: #cd0000">&quot;&lt;/table&gt;&quot;</span>
+                <span style="color: #cd00cd">echo</span>
+<span style="color: #cdcd00">fi</span>
+</pre></div>
+
+
+</body>
+</html>

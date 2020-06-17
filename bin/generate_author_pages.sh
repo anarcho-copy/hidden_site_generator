@@ -13,7 +13,7 @@ echo "usage: ./`basename $0` [-l] [-g]"
 }
 
 function generate_dir() {
-mkdir $workdirPdf/$url && out1;
+mkdir $workdirPdf/$url/ && out1;
 
 #searching books by author name
 author_books_index $author || out2; #saving as .generate_author_pages_html.txt #FROM CONFIG.SH

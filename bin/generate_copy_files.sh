@@ -14,7 +14,7 @@ echo "usage: ./`basename $0` [-l] [-g] [-e]"
 }
 
 function generate_dir() {
-mkdir $workdirCopy/$url && out1;
+mkdir $workdirCopy/$url/ && out1;
 
 copy_page > $workdirCopy/$url/index.html
 }

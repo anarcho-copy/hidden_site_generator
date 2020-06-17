@@ -12,7 +12,7 @@ echo "-m       md5 page generator"
 }
 
 function check_dir() {
-mkdir -p $listenCopy/$url
+mkdir -p $listenCopy/$url/
 }
 
 #LOOP for FUNCTIONS
@@ -48,16 +48,30 @@ cat > $listenCopy/$url/info.html << EOF && echo "$listenCopy/$url/info.html tabl
 <head>
 <title>exif bilgisi</title>
 <meta charset="utf-8">
+<!--force_base_href-->
 <meta name="robots" content="noindex,nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+$style
 </head>
-<body>
+<body class="bg-gray">
+<div id="holy" class="container-lg bg-white h-100">
+    <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+        <a class="UnderlineNav-actions muted-link h2" href="/index.html">
+    $site_title</a>
+       </nav>
+   </div>
+<br>
+ <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
  <a href="/copy/$url/">geri</a>
  <hr>
   <h1>exif bilgisi</h1>
   $($convert_table -f $listenCopy/$url/info.txt)
  <br>
  <hr>
-  <p>$(date -u) <a href="/tools/convert.sh.txt">table.sh</a></p>
+  <p>$(date -u) <a href="/tools/convert.sh.html">convert.sh</a></p>
+</div>
+</div>
 </body>
 </html>
 EOF
@@ -79,12 +93,25 @@ cat > $listenCopy/$url/md5.html << EOF && echo "$listenCopy/$url/md5.html genera
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex,nofollow" />
+<!--force_base_href-->
 <title>md5 of $url.pdf</title>
+$style
 </head>
-<body>
+<body class="bg-gray">
+<div id="holy" class="container-lg bg-white h-100">
+    <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+        <a class="UnderlineNav-actions muted-link h2" href="/index.html">
+    $site_title</a>
+       </nav>
+   </div>
+<br>
+  <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
  <a href="/copy/$url/">geri</a>
  <br/>
  <h1>$(md5sum $pdf_dir/$url.pdf | awk '{ print $1 }' || echo "can not showing md5")</h1>
+</div>
+</div>
 </body>
 </html>
 EOF
