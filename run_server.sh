@@ -46,7 +46,8 @@ fi
 #build html files [-b] option
 function build() {
 rm -rf i/out/*;
-mkdir i/out/{copy,pdf};
+mkdir -p i/out/{copy,pdf};
+mkdir -p .tmp/;
 bin/generate_author_pages.sh -gl
 bin/generate_copy_files.sh -egl
 bin/generate_websites_index.sh && echo "websites index page generated"
