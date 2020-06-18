@@ -88,7 +88,7 @@ start_tor_server && echo "tor server is running.. hostname: $(grep -oP "server_n
 
 
 
-#purge everything [-p] option
+#purge [ -p --default | --all | --web ] option
 function purge() {
 function delete_default() {
 rm -rf i/out/* && echo "i/out/* are deleted";
