@@ -30,7 +30,7 @@ purge_guide;
 #generate new tor adress [-n] option
 function new_address() {
 function run_new_address() {
-echo "For the delete web dir you must be a root." && sudo rm -rf web/;
+[ -d "web/" ] && echo "For the delete web dir you must be a root." && sudo rm -rf web/;
 docker run -it --rm -v $(pwd)/web:/web tor-docker generate ^copy && echo "tor address is generated";
 }
 if ask "do you want the generate new tor address?" N; then
@@ -115,7 +115,7 @@ rm -rf i/listen/copy/* && echo "i/listen/* are deleted";
     ;;
     --web)
         if ask "do you want the delete web files?" N; then
-            rm -rf web/ && echo "web/ directory is deleted";
+            echo "For the delete web dir you must be a root." && sudo rm -rf web/ && echo "web/ directory is deleted";
         else
             echo "--web option is bypassed";
         fi
