@@ -2,11 +2,22 @@
 
 ##meta configs
 generator="HTML generator BASH (bash-builtin), https://git.anarcho-copy.org/www.anarcho-copy.org/gen_html";
+robots_config="noindex,nofollow"
 
 #website main title
 site_title="Anarcho-Copy Hidden Site"
 hidden_site=$(echo "http://$(grep -oP "server_name\s+\K\w+" ../web/site.conf).onion")
 base_href=$hidden_site ##not using at <!--force_base_href-->
+
+#robots.txt config
+function create_robots() {
+cat > ../i/contents/robots.txt << EOF
+User-Agent: *
+Disallow: /
+EOF
+}
+
+create_robots;
 
 temp="../.tmp";
 

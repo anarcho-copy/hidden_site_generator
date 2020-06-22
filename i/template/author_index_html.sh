@@ -12,7 +12,7 @@ cat <<EOT
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="$site_title Service. Books PDF" />
 <meta name="copyright" content="No Copyright" />
-<meta name="robots" content="index,follow" />
+<meta name="robots" content="$robots_config" />
 <meta name="generator" content="$generator" />
 <meta http-equiv="Content-Style-Type" content="text/css">
 

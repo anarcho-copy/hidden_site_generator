@@ -15,7 +15,7 @@ cat <<EOT
 <meta name="description" content="$author - $title PDF dosyası indirme sayfası. $description" />
 <meta name="keywords" content="pdf, $title pdf, $title, $author, indir$( [[ -n "$keywords" ]] && echo ", $keywords" )" />
 <meta name="copyright" content="No Copyright" />
-<meta name="robots" content="index,follow" />
+<meta name="robots" content="$robots_config" />
 <meta name="generator" content="$generator" />
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
