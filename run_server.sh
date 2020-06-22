@@ -79,8 +79,8 @@ ln -s /mnt/disk/free/* public/free && echo "/var/pdf/ symbolic link created"
 tor.html > public/tor.html && echo "tor.html created"
 mkdir public/index && echo "index page creating.."
 nohup bash src/index.sh > public/index/index.html &
-find public/ -type f -exec chmod 0644 {} \ &> /dev/null && echo "files permissions setted"
-find public/ -type d -exec chmod 0755 {} \ &> /dev/null && echo "directory permissions setted"
+find public/ -type f -exec chmod 0644 {} \; &> /dev/null && echo "files permissions setted"
+find public/ -type d -exec chmod 0755 {} \; &> /dev/null && echo "directory permissions setted"
 }
 
 
