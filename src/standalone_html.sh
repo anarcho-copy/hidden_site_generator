@@ -1,6 +1,9 @@
 #!/bin/bash
 #printer friendly
 
+#config
+link="https://anarcho-copy.org"
+
 cd "$(dirname "$0")"
 cd ../bin/;
 . config.sh; #import
@@ -15,7 +18,7 @@ sqlite3 $db_file "SELECT title,url FROM books WHERE author IS '$1'" > /tmp/.tabl
 while IFS="|" read -r title url
 do
 cat <<EOT
-<li><a href="https://anarcho-copy.org/copy/$url/">$title</a></li>
+<li><a href="$link/copy/$url/">$title</a></li>
 EOT
 done < /tmp/.table.txt
 }
