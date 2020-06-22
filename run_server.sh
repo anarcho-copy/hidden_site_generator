@@ -1,7 +1,9 @@
 #!/bin/bash
 
-. src/ask.sh #import the ask()
+cd "$(dirname "$0")";
 
+. src/ask.sh #import the ask()
+. i/template/tor.html.sh #import tor template page | tor.html()
 
 #help page
 
@@ -30,7 +32,7 @@ purge_guide;
 #generate new tor adress [-n] option
 function new_address() {
 function run_new_address() {
-[ -d "web/" ] && echo "For the delete web dir you must be a root." && sudo rm -rf web/;
+rm -rf web/;
 docker run -it --rm -v $(pwd)/web:/web tor-docker generate ^copy && echo "tor address is generated";
 }
 if ask "do you want the generate new tor address?" N; then
@@ -71,6 +73,7 @@ cp -r i/out/* public/ && echo "i/out/* files are copied."
 cp -r i/listen/copy/ public/ && echo "i/listen/copy/ dir copied"
 cp -r i/contents/* public/ && echo "i/contents/* are copied"
 ln -s /mnt/disk/free/* public/free && echo "/var/pdf/ symbolic link created"
+tor.html > public/tor.html && echo "tor.html created"
 mkdir public/index && echo "index page creating.."
 nohup bash src/index.sh > public/index/index.html &
 }
@@ -88,7 +91,7 @@ start_tor_server && echo "tor server is running.. hostname: $(grep -oP "server_n
 
 
 
-#purge [ -p --default | --all | --web ] option
+#purge everything [-p] option
 function purge() {
 function delete_default() {
 rm -rf i/out/* && echo "i/out/* are deleted";
@@ -115,7 +118,7 @@ rm -rf i/listen/copy/* && echo "i/listen/* are deleted";
     ;;
     --web)
         if ask "do you want the delete web files?" N; then
-            echo "For the delete web dir you must be a root." && sudo rm -rf web/ && echo "web/ directory is deleted";
+            rm -rf web/ && echo "web/ directory is deleted";
         else
             echo "--web option is bypassed";
         fi
@@ -150,9 +153,9 @@ while getopts ":hnbcgrp:ts" opt; do
       ;;
     t )
       if [ -f "web/site.conf" ]; then
-         echo -e "\e[92m$(grep -oP "server_name\s+\K\w+" web/site.conf).onion\e[0m"
+         echo -e "$(grep -oP "server_name\s+\K\w+" web/site.conf).onion"
       else
-         echo -e "\033[31mplease fist generate new tor adress!\e[0m  ./`basename $0` -n "
+         echo -e "\033[31mplease first generate new tor adress!\e[0m  ./`basename $0` -n "
       fi
       ;;
     s )
@@ -171,3 +174,4 @@ done
 if [ "$#" -lt 1 ]; then
     guide;
 fi
+
