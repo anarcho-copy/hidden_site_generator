@@ -49,8 +49,8 @@ tr:nth-child(even) {
   </tr>
 $(websites_index)
   <tr>
-    <td>anarcho-copy (hidden service)</td>
-    <td><a href="$hidden_site">$hidden_site</a></td>
+    <td>$site_title (onion service)</td>
+    <td><a href="$hidden_site">$([ -z "$hidden_site" ] && echo "Not running" || echo "$hidden_site")</a></td>
   </tr>
 </table>
 </br></br>

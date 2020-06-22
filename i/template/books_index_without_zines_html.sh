@@ -1,6 +1,25 @@
 #!/bin/bash
 #called from ../../bin/books_index_without_zines.sh
 
+function check_tor() {
+if [ -z "$hidden_site" ]
+then
+cat <<EOF
+<div class="flash flash-error">
+onion servisi çalışmıyor
+</div>
+EOF
+else
+cat <<EOF
+<div class="flash flash-success">
+onion servisi şu adreste çalışıyor:&nbsp;
+<a href="$hidden_site">$hidden_site</a>
+</div>
+EOF
+fi
+}
+
+
 function books_index_without_zines_html() {
 cat <<EOT
 <!DOCTYPE html>
@@ -75,10 +94,7 @@ $style
 <li><h2><a href="/siteler/">Referans Siteler </a></h2></li>
 </ul>
 
-<div class="flash flash-success">
-anarcho-copy onion servisi şu adreste çalışıyor: <a href="$hidden_site">$hidden_site</a>
-</div>
-
+$(check_tor)
 
 <hr>
 

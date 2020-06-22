@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##meta configs
-generator="HTML generator BASH (bash-builtin), https://git.anarcho-copy.org/www.anarcho-copy.org/gen_html";
+generator="HTML generator BASH (bash-builtin), https://git.anarcho-copy.org/www.anarcho-copy.org/hidden_site_generator";
 robots_config="noindex,nofollow"
 
 #website main title
