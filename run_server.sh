@@ -1,12 +1,14 @@
 #!/bin/bash
 
 cd "$(dirname "$0")";
-
 . src/ask.sh #import the ask()
 . i/template/tor.html.sh #import tor template page | tor.html()
+chmod 770 bin/*
+chmod 770 i/template/*
+chmod 770 src/*
+
 
 #help page
-
 function purge_guide() {
 cat <<EOF
 -p
@@ -67,6 +69,7 @@ bin/generate_pdf_files.sh -iem #-c option is delete already created files
 #generate the web site as use created files [-g option]
 function main() {
 mkdir -p public/;
+chmod 0755 public/;
 rm -rf public/* &> /dev/null && echo "pages deleted"
 mkdir public/free &> /dev/null && echo "pdf raw dir created"
 cp -r i/out/* public/ && echo "i/out/* files are copied."
@@ -76,8 +79,9 @@ ln -s /mnt/disk/free/* public/free && echo "/var/pdf/ symbolic link created"
 tor.html > public/tor.html && echo "tor.html created"
 mkdir public/index && echo "index page creating.."
 nohup bash src/index.sh > public/index/index.html &
+find public/ -type f -exec chmod 0644 {} \;
+find public/ -type d -exec chmod 0755 {} \;
 }
-
 
 
 #run tor server/container [-r] option
