@@ -3,3 +3,4 @@ i/out/*
 i/listen/*
 public/*
 .tmp/
+TorNginxDockerImage/

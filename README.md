@@ -73,6 +73,7 @@ $ sudo service nginx restart
 tor-nginx docker imajını inşa et,
 
 ```bash
+$ tar xzvf TorNginxDockerImage.tar.gz
 $ cd TorNginxDockerImage/
 $ docker build -t tor-docker .
 $ cd ..
