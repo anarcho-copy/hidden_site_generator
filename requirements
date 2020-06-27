@@ -4,6 +4,8 @@ imagemagick
 exiftool
 sqlite3
 nginx
+pdfinfo
+/proc/sys/kernel/random/uuid
 
 #some OS includes coreutils | debian etc.
 md5sum
