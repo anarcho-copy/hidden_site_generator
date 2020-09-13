@@ -36,6 +36,7 @@ purge_guide;
 function new_address() {
 function run_new_address() {
 rm -rf web/;
+mkdir web;
 docker run -it --rm -v $(pwd)/web:/web tor-docker generate ^copy && echo "tor address is generated";
 }
 if ask "do you want the generate new tor address?" N; then
