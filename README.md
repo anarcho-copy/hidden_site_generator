@@ -3,9 +3,9 @@
 ## İndir
 
 ```bash
-$ sudo mkdir -p /var/hidden-service/
-$ sudo chown -R $USER:$USER /var/hidden-service/
-$ cd /var/hidden-service/
+$ sudo mkdir -p /var/www/hidden-service/
+$ sudo chown -R $USER:$USER /var/www/hidden-service/
+$ cd /var/www/hidden-service/
 $ git clone https://git.anarcho-copy.org/www.anarcho-copy.org/hidden_site_generator.git
 ```
 
