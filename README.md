@@ -2,6 +2,8 @@
 
 ## İndir
 
+Not: Bu generator apt tabanlı debian ve dnf tabanlı fedora üzerinde test edilmiştir.
+
 ```bash
 $ sudo mkdir -p /var/www/hidden-service/
 $ sudo chown -R $USER:$USER /var/www/hidden-service/
@@ -66,7 +68,11 @@ Ardından proje dizinine git ve;
 gerekli programları indir,
 
 ```bash
-$ sudo ./Install_requirements.sh
+#for debian
+$ sudo ./install_requirements.sh debian
+
+#for fedora
+$ sudo ./install_requirements.sh rhel
 ```
 
 

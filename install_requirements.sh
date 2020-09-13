@@ -4,7 +4,7 @@ function guide() {
 echo "usage: ./`basename $0` [debian | rhel]"
 echo "use debian option to apt based distros, such as Ubuntu."
 echo -e "use rhel option to dnf based distros, such as Fedora.\n"
-echo "this program tested under debian and fedora."
+echo "this generator tested under debian and fedora."
 exit 0;
 }
 
