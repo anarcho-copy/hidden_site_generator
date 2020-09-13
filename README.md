@@ -53,19 +53,20 @@ podman-docker #for manipule docker command to podman.
 ## Çalıştırmadan Önce..
 
 Gerekli pdf dosyalarını indirip dizinleri ayarla.
+sunucunun internet hızına göre bu adım biraz uzun sürecek, çay içip bekle.
 
 ```bash
-$ sudo mkdir -p /mnt/disk/free/
-$ sudo chown -R $USER:$USER /mnt/disk/free/
-$ cd /mnt/disk/free/
-$ wget https://indir.anarcho-copy.org/free.tar.gz
-$ tar xzvf free.tar.gz
-$ mv free/* . && rm -rf free/ free.tar.gz
+$ sudo mkdir -p /var/www/public/anarcho-copy.org/free/
+$ sudo chown -R $USER:$USER /var/www/public/anarcho-copy.org/free/
+$ cd /var/www/public/anarcho-copy.org/free/
+$ wget https://anarcho-copy.org/.list
+$ for i in `<.list`; do wget "https://anarcho-copy.org/free/$i"; done
+$ rm .list
 ```
 
 Ardından proje dizinine git ve;
 
-gerekli programları indir,
+önce gerekli programları indir,
 
 ```bash
 #for debian
@@ -76,7 +77,7 @@ $ sudo ./install_requirements.sh rhel
 ```
 
 
-local nginx ayarlarını hallet,
+sonra local nginx ayarlarını hallet,
 ```bash
 #for debian
 $ sudo cp main_nginx.conf /etc/nginx/sites-available/anarchocopyService
