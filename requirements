@@ -1,4 +1,6 @@
-#this script written in GNU bash, version 5.0.16(1)-release (x86_64-pc-linux-gnu)
+#these scripts written in GNU bash; version 5.0.16(1)-release (x86_64-pc-linux-gnu) 
+# and version 5.0.17(1)-release (x86_64-redhat-linux-gnu)
+
 ghostscript
 imagemagick
 exiftool
@@ -7,5 +9,4 @@ nginx
 pdfinfo
 /proc/sys/kernel/random/uuid
 
-#some OS includes coreutils | debian etc.
-md5sum
+md5sum #some OS includes coreutils | debian, fedora etc.
