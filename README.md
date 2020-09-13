@@ -2,7 +2,7 @@
 
 Not: Bu generator apt tabanlı debian ve dnf tabanlı fedora üzerinde test edilmiştir. fedora için container uyguluması olarak podman kullanıldı, scriptte komut olarak docker olarak geçmekte bu sebeple docker komutunu podmana manipüle etmek için podman-docker kurulucaktır, eğer fedora sisteminizde docker varsa `install_requirements.sh` dosyasındaki podman-docker argümanını kaldırın.
 
-##İndir
+## İndir
 
 ```bash
 $ sudo mkdir -p /var/www/hidden-service/
