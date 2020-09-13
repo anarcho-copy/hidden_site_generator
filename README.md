@@ -37,6 +37,8 @@ exiftool
 sqlite3
 nginx
 coreutils
+poppler-utils
+podman-docker #for fedora
 ```
 
 
