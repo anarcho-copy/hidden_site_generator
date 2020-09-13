@@ -4,3 +4,4 @@ i/listen/*
 public/*
 .tmp/
 TorNginxDockerImage/
+nohup.log
