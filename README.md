@@ -107,7 +107,7 @@ $ ./run_server.sh -n
 ```
 
 
-statik dosyaları inşa et (bu adımdan sonra http://localhost:8080 kullanılabilir),
+statik dosyaları inşa et (bu adımdan sonra http://localhost:8080 kullanılabilir. makineni afişe etmemek için 8080 portunun dış dünyaya kapalı olduğundan emin ol),
 
 ```bash
 $ ./run_server.sh -bcg
