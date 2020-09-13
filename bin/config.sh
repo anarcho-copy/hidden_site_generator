@@ -7,6 +7,7 @@ robots_config="noindex,nofollow"
 #website main title
 site_title="Anarcho-Copy Hidden Site"
 hidden_site=$(echo "http://$(grep -oP "server_name\s+\K\w+" ../web/site.conf 2>/dev/null).onion")
+[ -f ../web/site.conf ] || hidden_site="";
 base_href=$hidden_site ##not using at <!--force_base_href-->
 
 #robots.txt config
