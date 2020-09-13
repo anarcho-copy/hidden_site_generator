@@ -31,14 +31,20 @@ usage: ./run_server.sh [-h] [-n] [-b|-c] [-g] [-r] [-t|-s] | [ -p --default | --
 
 ## Gereksinimler
 ```bash
+#for generate html and static files 
 ghostscript
 imagemagick
 exiftool
 sqlite3
 nginx
-coreutils
+coreutils #this is must already exist
 poppler-utils
-podman-docker #for fedora
+
+#for debian
+docker  #for onion service, isn't necessary.
+#for fedora
+podman  #for onion service, isn't necessary.
+podman-docker #for manipule docker command to podman.
 ```
 
 
