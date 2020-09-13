@@ -83,12 +83,19 @@ $ sudo systemctl restart nginx.service
 ```
 
 
-tor-nginx docker imajını inşa et,
+tor-nginx docker veya podman imajını inşa et,
 
 ```bash
+#for debian
 $ tar xzvf TorNginxDockerImage.tar.gz
 $ cd TorNginxDockerImage/
 $ docker build -t tor-docker .
+$ cd ..
+
+#for fedora
+$ tar xzvf TorNginxDockerImage.tar.gz
+$ cd TorNginxDockerImage/
+$ podman --cgroup-manager=cgroupfs build -t tor-docker .
 $ cd ..
 ```
 
