@@ -72,9 +72,14 @@ $ sudo ./Install_requirements.sh
 
 local nginx ayarlarını hallet,
 ```bash
+#for debian
 $ sudo cp main_nginx.conf /etc/nginx/sites-available/anarchocopyService
 $ sudo ln -s /etc/nginx/sites-available/anarchocopyService /etc/nginx/sites-enabled/anarchocopyService
 $ sudo service nginx restart
+
+#for fedora
+$ sudo cp main_nginx.conf /etc/nginx/conf.d/anarchocopyService.conf
+$ sudo systemctl restart nginx.service
 ```
 
 
