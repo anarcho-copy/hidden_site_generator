@@ -72,7 +72,7 @@ bin/generate_pdf_files.sh -iem #-c option is delete already created files
 function main() {
 mkdir -p public/;
 chmod 0755 public/;
-unlink public/free/* &> /dev/null && echo "symbolic links removed"
+find public/free -type l -exec unlink {} \; &> /dev/null && echo "symbolic links removed"
 rm -rf public/* &> /dev/null && echo "pages deleted"
 mkdir public/free &> /dev/null && echo "pdf raw dir created"
 cp -r i/out/* public/ && echo "i/out/* files are copied."
