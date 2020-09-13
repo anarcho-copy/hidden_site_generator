@@ -3,6 +3,7 @@
 cd "$(dirname "$0")";
 . src/ask.sh #import the ask()
 . i/template/tor.html.sh #import tor template page | tor.html()
+. bin/config.sh &> /dev/null #import config
 chmod 770 bin/*
 chmod 770 i/template/*
 chmod 770 src/*
@@ -70,12 +71,13 @@ bin/generate_pdf_files.sh -iem #-c option is delete already created files
 function main() {
 mkdir -p public/;
 chmod 0755 public/;
+unlink public/free/* &> /dev/null && echo "symbolic links removed"
 rm -rf public/* &> /dev/null && echo "pages deleted"
 mkdir public/free &> /dev/null && echo "pdf raw dir created"
 cp -r i/out/* public/ && echo "i/out/* files are copied."
 cp -r i/listen/copy/ public/ && echo "i/listen/copy/ dir copied"
 cp -r i/contents/* public/ && echo "i/contents/* are copied"
-ln -s /mnt/disk/free/* public/free && echo "/var/pdf/ symbolic link created"
+ln -s $pdf_dir/* public/free && echo "/var/pdf/ symbolic link created"
 tor.html > public/tor.html && echo "tor.html created"
 mkdir public/index && echo "index page creating.."
 nohup bash src/index.sh > public/index/index.html &

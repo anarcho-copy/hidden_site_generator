@@ -29,7 +29,7 @@ redend="\e[0m";
 data_base="../var/books.db";
 
 #pdfs dir config
-pdf_dir="/mnt/disk/free"
+pdf_dir="/var/www/public/anarcho-copy.org/free"
 
 #style
 function print_style() {
