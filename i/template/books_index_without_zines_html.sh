@@ -131,7 +131,9 @@ function myFunction() {
 }
 </script>
 
-<br/><br/>
+<br/>
+<iframe src="https://duckduckgo.com/search.html?width=180&duck=yes&site=anarcho-copy.org&prefill=Search at DuckDuckGo" style="overflow:hidden;margin:0;padding:0;width:313px;height:60px;" frameborder="0"></iframe> <p><a href="https://duckduckgo.com/privacy">DuckDuckGo Privacy</a></p>
+<br/>
 
 </div>
 </div>
