@@ -3,6 +3,7 @@
 cd "$(dirname "$0")";
 . src/ask.sh #import the ask()
 . i/template/tor.html.sh #import tor template page | tor.html()
+. i/template/standalone.sh #import standalone html page | print_standalone()
 . bin/config.sh &> /dev/null #import config
 chmod 770 bin/*
 chmod 770 i/template/*
@@ -80,6 +81,7 @@ cp -r i/listen/copy/ public/ && echo "i/listen/copy/ dir copied"
 cp -r i/contents/* public/ && echo "i/contents/* are copied"
 ln -s $pdf_dir/* public/free && echo "/var/pdf/ symbolic link created"
 tor.html > public/tor.html && echo "tor.html created"
+print_standalone > public/print.html && echo "print.html created"
 mkdir public/index && echo "index page creating.."
 nohup bash src/index.sh > public/index/index.html &
 find public/ -type f -exec chmod 0644 {} \; &> /dev/null && echo "files permissions setted"

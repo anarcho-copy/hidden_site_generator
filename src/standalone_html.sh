@@ -18,7 +18,7 @@ sqlite3 $db_file "SELECT title,url FROM books WHERE author IS '$1'" > /tmp/.tabl
 while IFS="|" read -r title url
 do
 cat <<EOT
-<li><a href="$link/copy/$url/">$title</a></li>
+<li><a href="$link/free/$url.pdf">$title</a></li>
 EOT
 done < /tmp/.table.txt
 }
@@ -44,18 +44,35 @@ function start_loop() {
 for x in $index_chars;
 do
 cat <<EOT
+<div id="$x">
 <li>$x
 <ul>
 $(start_index $x)
 </ul>
 </li>
+</div>
+EOT
+done;
+}
+
+
+function letters() {
+for x in $index_chars;
+do
+cat <<EOT
+ <a href="print.html#$x">$x</a>&nbsp;
 EOT
 done;
 }
 
 
 cat <<EOT
+<div id="letters">
+$(letters)
+</div>
+<div id="index">
 <ul>
 $(start_loop)
 </ul>
+</div>
 EOT
