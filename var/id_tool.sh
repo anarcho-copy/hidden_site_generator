@@ -3,7 +3,7 @@
 #exiftool -m -DocumentID= *
 
 function guide() {
-echo "usage: ./`basename $0` [generate | list]"
+echo "usage: ./`basename $0` [generate | list | new]"
 }
 
 function generate() {
@@ -24,6 +24,11 @@ done
 function list() {
 #uuidgen look this
 sqlite3 books.db "SELECT id,title FROM books;";
+}
+
+function new() {
+echo "uuid:$(cat /proc/sys/kernel/random/uuid)"
+date '+%d/%m/%Y %H:%M:%S'
 }
 
 if [ "$#" -lt 1 ]; then
