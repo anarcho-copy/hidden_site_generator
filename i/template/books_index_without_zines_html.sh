@@ -96,7 +96,8 @@ $style
 <ul>
 <li><h2><a href="/pdf/">Dergi, Gazete, Fanzin ve Spesifik Yazarlar</a>&nbsp;<span class="Counter Counter--gray">$zine_count</span></h2></li>
 <li><h2><a href="/index/">Kapsamlı İndex</a>&nbsp;<span class="Counter Counter--gray">$total_count</span></h2></li>
- <a href="/print.html">Bağımsız HTML (basıma uygun)</a>
+ - <a href="/print.html">Bağımsız HTML (basıma uygun)</a><br/>
+ - <a href="https://git.anarcho-copy.org/www.anarcho-copy.org/hidden_site_generator/raw/master/var/books.db">Kitaplar için sqlite veritabanı</a>
 <li><h2><a href="/siteler/">Referans Siteler </a></h2></li>
 </ul>
 
