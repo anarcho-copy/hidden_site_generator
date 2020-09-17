@@ -97,7 +97,8 @@ $style
 <li><h2><a href="/pdf/">Dergi, Gazete, Fanzin ve Spesifik Yazarlar</a>&nbsp;<span class="Counter Counter--gray">$zine_count</span></h2></li>
 <li><h2><a href="/index/">Kapsamlı İndex</a>&nbsp;<span class="Counter Counter--gray">$total_count</span></h2></li>
  - <a href="/print.html">Bağımsız HTML (basıma uygun)</a><br/>
- - <a href="https://git.anarcho-copy.org/www.anarcho-copy.org/hidden_site_generator/raw/master/var/books.db">Kitaplar için sqlite veritabanı</a>
+ - <a href="https://git.anarcho-copy.org/www.anarcho-copy.org/hidden_site_generator/raw/master/var/books.db">Kitaplar için sqlite veritabanı</a><br/>
+ - <a href="#duck">DuckDuckGo araması yap</a>
 <li><h2><a href="/siteler/">Referans Siteler </a></h2></li>
 </ul>
 
@@ -107,8 +108,10 @@ $(check_tor)
 
 <h1 id="kitaplar">Kitaplar&nbsp;<span class="Counter Counter--gray">$books_count</span></h1>
 
+<div id="search">
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Kitapları ara.." title="Bir isim yaz">
 <noscript>Lütfen arama filtresi için JavaScript'inizi etkinleştirin!</noscript>
+</div>
 
 <ul id="myUL">
 $(books_index_without_zines)
@@ -132,11 +135,14 @@ function myFunction() {
     }
 }
 </script>
-
+</br>
+<div id="duck">
 <br/>
 <iframe src="https://duckduckgo.com/search.html?width=180&duck=yes&site=anarcho-copy.org&prefill=Search at DuckDuckGo" style="overflow:hidden;margin:0;padding:0;width:313px;height:60px;" frameborder="0"></iframe> <p><a href="https://duckduckgo.com/privacy">DuckDuckGo Privacy</a></p>
+</br>
+</div>
 <br/>
-
+<p>$(date -u)</p>
 </div>
 </div>
 </body>
