@@ -100,7 +100,7 @@ sqlite3 $data_base "SELECT title,author,url,status FROM books WHERE status IS NO
 
 #CREATE ALL BOOKS TABLE
 function create_all_books() {
-sqlite3 $data_base "SELECT title,author,url,subtitle,description,keywords,id,type,lang FROM books" > $temp/all_books.txt
+sqlite3 $data_base "SELECT title,author,url,subtitle,description,keywords,rowid,type,lang FROM books" > $temp/all_books.txt
 }
 
 
