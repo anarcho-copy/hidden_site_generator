@@ -3,6 +3,7 @@
 
 #config
 link="https://anarcho-copy.org"
+pwd="https://build.anarcho-copy.org"
 
 cd "$(dirname "$0")"
 cd ../bin/;
@@ -29,12 +30,16 @@ sqlite3 $db_file "SELECT author FROM books WHERE author LIKE '$1%'" > /tmp/.list
 sort /tmp/.list.txt | uniq -ci > /tmp/.listed.txt
 while IFS=" " read -r count author
 do
+id=$(echo "$author" | bash $url_slug);
 cat <<EOT
-<li>$author ($count)
-<ul>
+<div class="author-name">
+<li id="$id"><a href="$pwd/print.html#$id">$author</a> ($count)
+</div>
+<ul class="book-name">
 $(author_table "$author")
 </ul>
 </li>
+<br/>
 EOT
 done < /tmp/.listed.txt
 }
@@ -44,13 +49,12 @@ function start_loop() {
 for x in $index_chars;
 do
 cat <<EOT
-<div id="$x">
-<li>$x
+<li id="$x">$x
 <ul>
 $(start_index $x)
 </ul>
 </li>
-</div>
+<br/><br/>
 EOT
 done;
 }
@@ -67,7 +71,7 @@ done;
 
 
 cat <<EOT
-<div id="letters">
+<div id="letters" class="letters">
 $(letters)
 </div>
 <div id="index">
