@@ -5,8 +5,28 @@
 cd "$(dirname "$0")";
 . ../bin/config.sh #get pdf_dir
 
+
+function manual() {
+echo -e "usage: `basename $0` [generatedb] [listdb] [new <file>] [getid <file>] [showid <uuid>]\n  [set <uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx> <file>] [help | version]"
+}
+
+function help() {
+echo "";
+manual;
+cat <<EOF
+
+generatedb : set uuid to all pdf files.
+listdb     : show uuid of all pdf files.
+getid      : get uuid of entired pdf.
+showid     : get info of an entired uuid.
+set        : set uuid to a pdf file.
+
+EOF
+}
+
 function guide() {
-echo -e "usage: ./`basename $0` [generatedb] [listdb] [new <file>] \n  [set <uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx> <file>]"
+manual;
+exit 0;
 }
 
 function generatedb() {
@@ -26,7 +46,7 @@ done
 
 function listdb() {
 #uuidgen look this
-sqlite3 books.db "SELECT id,title FROM books;";
+sqlite3 books.db "SELECT id,title,url,author FROM books;";
 }
 
 function new() {
@@ -41,8 +61,20 @@ exiftool -m -DocumentID="$1" $2 && exiftool $2 | grep 'Document ID';
 echo "$1 - $2"
 }
 
+function getid() {
+exiftool -DocumentID $1 | tail -c 42;
+}
+
+function showid() {
+sqlite3 books.db "SELECT title,url,author FROM books WHERE id IS '$1';";
+}
+
+function version() {
+git describe --tags;
+}
+
 if [ "$#" -lt 1 ]; then
     guide;
 fi
 
-$@;
+$@ 2>/dev/null || echo "bad command.";
