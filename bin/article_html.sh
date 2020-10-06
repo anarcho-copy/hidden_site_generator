@@ -9,7 +9,8 @@ sqlite3 $data_base "SELECT id FROM article_html;" > $temp/.ids.txt
 
 while IFS= read -r id;
 do
-article[$id]=$(sqlite3 $data_base "SELECT code FROM article_html WHERE id is '$id'" | awk '{print}' ORS='\\n')
+rowID=$(sqlite3 $data_base "SELECT rowid FROM books WHERE id is '$id'")
+article["$rowID"]=$(sqlite3 $data_base "SELECT code FROM article_html WHERE id is '$id'" | awk '{print}' ORS='\\n')
 done < $temp/.ids.txt
 
 }
