@@ -109,7 +109,7 @@ $(check_tor)
 <h1 id="kitaplar">Kitaplar&nbsp;<span class="Counter Counter--gray">$books_count</span></h1>
 
 <div id="search">
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Kitapları ara.." title="Bir isim yaz">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Kitapları filtrele.." title="Bir isim yaz">
 <noscript>Lütfen arama filtresi için JavaScript'inizi etkinleştirin!</noscript>
 </div>
 
