@@ -10,13 +10,13 @@ exit 0;
 
 debian(){
 apt-get update && \
-    apt-get -y install \
+    apt-get install \
     ghostscript imagemagick libimage-exiftool-perl sqlite3 coreutils nginx pdfinfo
 }
 
 
 rhel(){
-dnf install -y \
+dnf install \
     ghostscript ImageMagick perl-Image-ExifTool sqlite coreutils nginx poppler-utils podman-docker
 }
 
