@@ -16,7 +16,7 @@ $ git clone https://git.anarcho-copy.org/www.anarcho-copy.org/hidden_site_genera
 ## Basit Kullanım
 ```bash
 $ ./run_server.sh 
-usage: ./run_server.sh [-h] [-n] [-b|-c] [-g] [-r] [-t|-s] | [ -p --default | --all | --web ]
+usage: ./run_server.sh [-h] [-n] [-b|-c] [-g] [-r] [-t|-s] | [ -p --delete | --delete-all | --web ]
 -h       help page
 -n       generate new tor address
 -b       build html.
