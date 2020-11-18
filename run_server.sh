@@ -20,7 +20,7 @@ cat <<EOF
 EOF
 }
 function guide() {
-echo "usage: ./`basename $0` [-h] [-n] [-b|-c] [-g] [-r] [-t|-s] | [ -p --default | --all | --web ]"
+echo "usage: ./`basename $0` [-h] [-n] [-b|-c] [-g] [-r] [-t|-s] | [ -p --delete | --delete-all | --web ]"
 echo "-h       help page"
 echo "-n       generate new tor address"
 echo "-b       build html."
@@ -183,4 +183,3 @@ done
 if [ "$#" -lt 1 ]; then
     guide;
 fi
-
