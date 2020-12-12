@@ -12,12 +12,13 @@ debian(){
 apt-get update && \
     apt-get install \
     ghostscript imagemagick libimage-exiftool-perl sqlite3 coreutils nginx pdfinfo
+	# libio-compress-perl libdigest-sha-perl
 }
 
 
 rhel(){
 dnf install \
-    ghostscript ImageMagick perl-Image-ExifTool sqlite coreutils nginx poppler-utils podman-docker
+    ghostscript ImageMagick perl-Image-ExifTool sqlite coreutils nginx poppler-utils podman-docker perl-IO-Compress perl-Digest-SHA
 }
 
 if [ "$#" -lt 1 ]; then
