@@ -9,7 +9,7 @@ cd - &> /dev/null
 
 db_file="../var/books.db";
 
-index_chars="1 A B C Ç D E F G Ğ I İ J K L M N O Ö P R S Ş T U Ü V W Y Z";
+index_chars="1 2 A B C Ç D E F G Ğ H I İ J K L M N O Ö P Q R S Ş T U Ü V W X Y Z";
 
 #CGI-Bash compatible
 #echo "Content-type: text/html"
