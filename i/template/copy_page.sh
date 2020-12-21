@@ -37,7 +37,7 @@ background-color:gray;
 <br>
 <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
 <!-- /$cgi_search${ae_array[$i]} -->
-<h1><a href="/index/#$(echo "$author" | bash $url_slug )">$author</a> / $title PFD</h1>$( [[ -n "$subtitle" ]] && echo -ne "\n<h2>$subtitle</h2>")
+<h1><a href="/index/#$(echo "$author" | bash $url_slug )">$author</a> / $title PDF</h1>$( [[ -n "$subtitle" ]] && echo -ne "\n<h2>$subtitle</h2>")
 <p><a href="/copy/${books_array[$(($j - 1))]}/">prev</a> | <a href="/copy/${books_array[$(($j + 1))]}/">next</a></p> <!-- next and prev -->
 <hr>
 <img src="/copy/$url/image.jpeg" alt="$title - $author"/>
