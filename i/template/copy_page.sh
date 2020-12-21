@@ -13,10 +13,10 @@ cat <<EOT
 <!--force_base_href-->
 <title>$author - $title PDF</title>
 <meta name="description" content="$author - $title PDF dosyası indirme sayfası. $description" />
-<meta name="keywords" content="pdf, $title pdf, $title, $author, indir, $( [[ -n "$keywords" ]] && echo ", $keywords" )" />
+<meta name="keywords" content="pdf, $title pdf, $title, $author, indir, $( [[ -n "$keywords" ]] && echo "$keywords" )" />
 <meta name="copyright" content="No Copyright" />
 <meta name="robots" content="$robots_config" />
-<meta name="generator" content="$generator" />
+<meta name="generator" content="$generator" />x
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 $style
