@@ -6,14 +6,14 @@ if [ -z "$hidden_site" ]
 then
 cat <<EOF
 <div class="flash flash-error">
-onion servisi çalışmıyor
+onion adresi tanımlanmadı
 </div>
 EOF
 else
 cat <<EOF
 <div class="flash flash-success">
 onion servisi şu adreste çalışıyor:&nbsp;
-<a href="$hidden_site">$hidden_site</a>
+<a href="http://$hidden_site">$hidden_site</a>
 </div>
 EOF
 fi

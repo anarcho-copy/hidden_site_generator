@@ -16,20 +16,20 @@ index_chars="1 2 A B C Ç D E F G Ğ H I İ J K L M N O Ö P Q R S Ş T U Ü V W
 #echo ""
 
 function author_index() {
-sqlite3 $db_file "SELECT author FROM books WHERE author LIKE '$1%'" > /tmp/.list.txt
-sort /tmp/.list.txt | uniq -ci > /tmp/.listed.txt
+sqlite3 $db_file "SELECT author FROM books WHERE author LIKE '$1%'" > .list.txt
+sort .list.txt | uniq -ci > .listed.txt
 while IFS=" " read -r count author
 do
 cat <<EOT
-<a href="/index/#$(cat /tmp/.author_count)">$author</a> ($count),
+<a href="/index/#$(cat .author_count)">$author</a> ($count),
 EOT
- echo "$((  $(cat /tmp/.author_count) + 1 ))" > /tmp/.author_count 
-done < /tmp/.listed.txt
+ echo "$((  $(cat .author_count) + 1 ))" > .author_count
+done < .listed.txt
 }
 
 
 function author_loop() {
-echo "0" > /tmp/.author_count
+echo "0" > .author_count
 for x in $index_chars;
 do
 cat <<EOT
@@ -43,35 +43,35 @@ done;
 ###########################3
 
 function author_table() {
-sqlite3 $db_file "SELECT title,url FROM books WHERE author IS '$1'" > /tmp/.table.txt
+sqlite3 $db_file "SELECT title,url FROM books WHERE author IS '$1'" > .table.txt
 while IFS="|" read -r title url
 do
 cat <<EOT
 <li><a href="/copy/$url/">$title</a></li>
 EOT
-done < /tmp/.table.txt
+done < .table.txt
 }
 
 
 function start_index() {
-sqlite3 $db_file "SELECT author FROM books WHERE author LIKE '$1%'" > /tmp/.list.txt
-sort /tmp/.list.txt | uniq -ci > /tmp/.listed.txt
+sqlite3 $db_file "SELECT author FROM books WHERE author LIKE '$1%'" > .list.txt
+sort .list.txt | uniq -ci > .listed.txt
 while IFS=" " read -r count author
 do
 cat <<EOT
-<li id="$(cat /tmp/.id_count)"><span id="$(echo "$author" | bash $url_slug )">$author ($count)</span>
+<li id="$(cat .id_count)"><span id="$(echo "$author" | bash $url_slug )">$author ($count)</span>
 <ul>
 $(author_table "$author")
 </ul>
 </li>
 EOT
- echo "$((  $(cat /tmp/.id_count) + 1 ))" > /tmp/.id_count 
-done < /tmp/.listed.txt
+ echo "$((  $(cat .id_count) + 1 ))" > .id_count 
+done < .listed.txt
 }
 
 
 function start_loop() {
-echo "0" > /tmp/.id_count
+echo "0" > .id_count
 for x in $index_chars;
 do
 cat <<EOT
@@ -154,3 +154,4 @@ echo -ne "</br></br></div>\n</div>\n</body>\n</html>"
 
 ##END
 
+rm .list.txt .listed.txt .author_count .table.txt .id_count &>/dev/null

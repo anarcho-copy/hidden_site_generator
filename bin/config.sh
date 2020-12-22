@@ -6,8 +6,8 @@ robots_config="noindex,nofollow"
 
 #website main title
 site_title="Anarcho-Copy Hidden Site"
-hidden_site=$(echo "http://$(grep -oP "server_name\s+\K\w+" ../web/site.conf 2>/dev/null).onion")
-[ -f ../web/site.conf ] || hidden_site="";
+hidden_site=$(cat ../web/hostname 2>/dev/null)
+[ -f ../web/hostname ] || hidden_site="";
 base_href=$hidden_site ##not using at <!--force_base_href-->
 
 #robots.txt config
@@ -30,7 +30,7 @@ redend="\e[0m";
 data_base="../var/books.db";
 
 #pdfs dir config
-pdf_dir="/var/www/public/anarcho-copy.org/free"
+pdf_dir="/data/data/com.termux/files/usr/var/www/public/anarcho-copy.org/free"
 
 #style
 function print_style() {

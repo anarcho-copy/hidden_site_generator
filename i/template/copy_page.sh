@@ -16,7 +16,7 @@ cat <<EOT
 <meta name="keywords" content="pdf, $title pdf, $title, $author, indir, $( [[ -n "$keywords" ]] && echo "$keywords" )" />
 <meta name="copyright" content="No Copyright" />
 <meta name="robots" content="$robots_config" />
-<meta name="generator" content="$generator" />x
+<meta name="generator" content="$generator" />
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 $style

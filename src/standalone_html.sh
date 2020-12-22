@@ -15,19 +15,19 @@ index_chars="1 2 A B C Ç D E F G Ğ H I İ J K L M N O Ö P Q R S Ş T U Ü V W
 
 
 function author_table() {
-sqlite3 $db_file "SELECT title,url FROM books WHERE author IS '$1'" > /tmp/.table.txt
+sqlite3 $db_file "SELECT title,url FROM books WHERE author IS '$1'" > .table.txt
 while IFS="|" read -r title url
 do
 cat <<EOT
 <li><a href="$link/free/$url.pdf">$title</a></li>
 EOT
-done < /tmp/.table.txt
+done < .table.txt
 }
 
 
 function start_index() {
-sqlite3 $db_file "SELECT author FROM books WHERE author LIKE '$1%'" > /tmp/.list.txt
-sort /tmp/.list.txt | uniq -ci > /tmp/.listed.txt
+sqlite3 $db_file "SELECT author FROM books WHERE author LIKE '$1%'" > .list.txt
+sort .list.txt | uniq -ci > .listed.txt
 while IFS=" " read -r count author
 do
 id=$(echo "$author" | bash $url_slug);
@@ -41,7 +41,7 @@ $(author_table "$author")
 </li>
 <br/>
 EOT
-done < /tmp/.listed.txt
+done < .listed.txt
 }
 
 
@@ -80,3 +80,5 @@ $(start_loop)
 </ul>
 </div>
 EOT
+
+rm .table.txt .list.txt .listed.txt &>/dev/null
