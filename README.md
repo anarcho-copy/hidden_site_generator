@@ -1,6 +1,7 @@
 # Anarcho-Copy HTML generatörü / Tor-Onion Servisi.
-
-Not: Bu generator apt tabanlı debian ve dnf tabanlı fedora üzerinde test edilmiştir. fedora için container uyguluması olarak podman kullanıldı, scriptte komut olarak docker olarak geçmekte bu sebeple docker komutunu podmana manipüle etmek için podman-docker kurulucaktır, eğer fedora sisteminizde docker varsa `install_requirements.sh` dosyasındaki podman-docker argümanını kaldırın.
+ 
+ - Bu generator apt tabanlı debian ve dnf tabanlı fedora üzerinde test edilmiştir. Android işletim sistemiyle de uyumludur, android üzerinde kurulum için [TERMUX](TERMUX.md) belgesindeki yönergeleri takip edin. 
+ - Fedora için container uyguluması olarak podman kullanıldı, scriptte komut olarak docker olarak geçmekte bu sebeple docker komutunu podmana manipüle etmek için podman-docker kurulucaktır, eğer fedora sisteminizde docker varsa `install_requirements.sh` dosyasındaki podman-docker argümanını kaldırın.
 
 ## İndir
 
