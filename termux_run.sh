@@ -19,7 +19,7 @@ cat <<EOF
 EOF
 }
 function guide() {
-echo "usage: ./`basename $0` [-h] [-n] [-b|-c] [-g] [-r] [-t|-s] | [ -p --delete | --delete-all ]"
+echo "usage: ./`basename $0` [-h] [-b|-c] [-g] [-t] | [ -p --delete | --delete-all ]"
 echo "-h       help page"
 echo "-b       build html."
 echo "-c       create static contents (as image etc.)"

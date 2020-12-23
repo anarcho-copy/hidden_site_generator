@@ -123,15 +123,15 @@ $ ./termux_run.sh -bcg
 ## Kullanım
 
 ```
-usage: ./termux_run.sh [-h] [-n] [-b|-c] [-g] [-r] [-t|-s] | [ -p --delete | --delete-all ]
+usage: ./termux_run.sh [-h] [-b|-c] [-g] [-t] | [ -p --delete | --delete-all ]
 -h       help page
 -b       build html.
 -c       create static contents (as image etc.)
 -g       generate the web site as use created files
+-t       view tor adress
 -p
    --delete     (it does not include the static contents)
    --delete-all (purge all files, it does include the static contents)
-
 ```
 
 
