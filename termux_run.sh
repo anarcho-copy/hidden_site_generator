@@ -24,6 +24,7 @@ echo "-h       help page"
 echo "-b       build html."
 echo "-c       create static contents (as image etc.)"
 echo "-g       generate the web site as use created files"
+echo "-t       view tor adress"
 purge_guide;
 }
 
@@ -102,7 +103,7 @@ rm -rf i/listen/copy/* && echo "i/listen/* are deleted";
 }
 
 
-while getopts ":hbcgp:" opt; do
+while getopts ":hbcgtp:" opt; do
   case ${opt} in
     h ) guide;
       ;;
@@ -111,6 +112,8 @@ while getopts ":hbcgp:" opt; do
     c ) create;
       ;;
     g ) main;
+      ;;
+    t ) cat web/hostname 2>/dev/null || echo "tor address not defined in web/hostname";
       ;;
     p )
       purge_arg=${OPTARG}
